@@ -42,5 +42,5 @@ object AuthLoginRequests extends BaseRequest {
       .formParam("enrolment[0].taxIdentifier[0].name", "")
       .formParam("enrolment[0].taxIdentifier[0].value", "")
       .check(status.is(303))
-      .check(header("Location").is(startPageUrl))
+      .check(header("Location").is(s"$route/start"))
 }
