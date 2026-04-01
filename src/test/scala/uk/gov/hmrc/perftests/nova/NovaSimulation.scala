@@ -34,12 +34,5 @@ class NovaSimulation extends PerformanceTestRunner {
     getVehicleOutsideEUPage
   )
 
-  setup(
-    "auth-baseline-simulation",
-    "NoVA Imports Notification Baseline Simulation"
-  ) withRequests (
-    navigateToAuth,
-    authLogInAsIndividual
-  )
   runSimulation()
 }
