@@ -18,15 +18,21 @@ package uk.gov.hmrc.perftests.nova
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.nova.AuthLoginRequests._
+import uk.gov.hmrc.perftests.nova.IndividualImportingFromOutsideEUJourneyRequests._
 
 class NovaSimulation extends PerformanceTestRunner {
 
   setup(
-    "auth-baseline-simulation",
-    "NoVA Imports Notification Baseline Simulation"
+    "individual-importing-from-outside-eu-journey",
+    "Individual notifying vehicle import from outside EU"
   ) withRequests (
     navigateToAuth,
-    authLogInAsIndividual
+    authLogInAsIndividual,
+    getStartPage,
+    getVehicleFromEUPage,
+    postVehicleFromEUPageAsNo,
+    getVehicleOutsideEUPage
   )
+
   runSimulation()
 }
