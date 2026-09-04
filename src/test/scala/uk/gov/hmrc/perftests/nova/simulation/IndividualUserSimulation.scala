@@ -54,6 +54,7 @@ trait IndividualUserSimulation extends PerformanceTestRunner {
     selectBusiness,
     navigateToNotifyingAsPurchaserOrOnBehalf,
     selectNotifyingOnBehalf,
+    navigateToIsThePurchaserABusinessOrPrivateIndividual,
     selectPurchaserIsBusiness
   )
 }
