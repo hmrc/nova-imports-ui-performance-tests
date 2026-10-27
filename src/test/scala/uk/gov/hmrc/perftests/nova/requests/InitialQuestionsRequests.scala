@@ -29,6 +29,7 @@ object InitialQuestionsRequests extends BaseRequest {
   private val purchaserABusinessOrPrivateIndividual = s"$route/purchaser-business-or-private-individual"
   private val orgVehicleForBusinessUse              = s"$route/vehicle-business-use"
   private val agentClientVehicleForBusinessUse      = s"$route/client-vehicle-business-use"
+  private val checkYourAnswersInitialQuestions      = s"$route/check-answers/initial-questions"
 
   // Initial Questions 1.0
   val navigateToVehicleFromEU: HttpRequestBuilder =
@@ -36,7 +37,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$vehicleFromEU")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Notifying for a vehicle brought into Northern Ireland").exists)
+      .check(regex("Is this notification for a vehicle brought into Northern Ireland from an EU country?").exists)
 
   val selectVehicleFromEUNo: HttpRequestBuilder =
     http("Select No on Vehicle from EU Page")
@@ -65,7 +66,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$areYouABusinessOrPrivateIndividual")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Are you a business or private individual\\?").exists)
+      .check(regex("Are you a business or private individual?").exists)
 
   val selectBusiness: HttpRequestBuilder =
     http("Select Business on Are you a business or private individual Page")
@@ -87,7 +88,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$notifyingAsPurchaserOrOnBehalf")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Are you notifying as the purchaser, or on behalf of a purchaser\\?").exists)
+      .check(regex("Are you notifying as the purchaser, or on behalf of a purchaser?").exists)
 
   val selectNotifyingAsPurchaser: HttpRequestBuilder =
     http("Select Notifying as Purchaser")
@@ -95,7 +96,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "self")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   val selectNotifyingOnBehalf: HttpRequestBuilder =
     http("Select Notifying on Behalf of purchaser")
@@ -111,7 +112,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$purchaserABusinessOrPrivateIndividual")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Is the purchaser you’re notifying on behalf of a business or private individual\\?").exists)
+      .check(regex("Is the purchaser you’re notifying on behalf of a business or private individual?").exists)
 
   val selectPurchaserIsBusiness: HttpRequestBuilder =
     http("Select Purchaser is a Business")
@@ -119,7 +120,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "self")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   val selectPurchaserIsPrivateIndividual: HttpRequestBuilder =
     http("Select Purchaser is a Private Individual")
@@ -127,7 +128,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "other")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   // Agent Question 1.0
   val navigateToAgentClientVehicleForBusinessUse: HttpRequestBuilder =
@@ -135,7 +136,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$agentClientVehicleForBusinessUse")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Has your client brought a vehicle into the UK for business use\\?").exists)
+      .check(regex("Has your client brought a vehicle into the UK for business use?").exists)
 
   val selectClientVehicleForBusinessUseYes: HttpRequestBuilder =
     http("Select Yes on Has your client brought a vehicle into the UK for business use? Page")
@@ -143,7 +144,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "true")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   val selectClientVehicleForBusinessUseNo: HttpRequestBuilder =
     http("Select No on Has your client brought a vehicle into the UK for business use? Page")
@@ -151,7 +152,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "false")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   // Organisation Question 1.0
   val navigateToOrgVehicleForBusinessUse: HttpRequestBuilder =
@@ -159,7 +160,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .get(s"$baseUrl$orgVehicleForBusinessUse")
       .check(status.is(200))
       .check(saveCsrfToken())
-      .check(regex("Have you brought a vehicle into the UK for business use\\?").exists)
+      .check(regex("Have you brought a vehicle into the UK for business use?").exists)
 
   val selectOrgVehicleForBusinessUseYes: HttpRequestBuilder =
     http("Select Yes on Have you brought a vehicle into the UK for business use? Page")
@@ -167,7 +168,7 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "true")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
 
   val selectOrgVehicleForBusinessUseNo: HttpRequestBuilder =
     http("Select No on Have you brought a vehicle into the UK for business use? Page")
@@ -175,5 +176,21 @@ object InitialQuestionsRequests extends BaseRequest {
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("value", "false")
       .check(status.is(303))
-      .check(header("Location").is(s"$route/check-answers/initial-questions"))
+      .check(header("Location").is(checkYourAnswersInitialQuestions))
+
+  // Check your answers - Initial Questions
+  val navigateToCheckYourAnswersInitialQuestions: HttpRequestBuilder =
+    http("Navigate to Check your answers - Initial Questions Page")
+      .get(s"$baseUrl$checkYourAnswersInitialQuestions")
+      .check(status.is(200))
+      .check(saveCsrfToken())
+      .check(regex("Initial questions").exists)
+      .check(regex("Check your answers").exists)
+
+  val submitCheckYourAnswersInitialQuestions: HttpRequestBuilder =
+    http("Submit Check your answers - Initial Questions Page")
+      .post(s"$baseUrl$checkYourAnswersInitialQuestions")
+      .formParam("csrfToken", csrfTokenExpr)
+      .check(status.is(303))
+      .check(header("Location").is(s"$route/create-vehicle-notification"))
 }

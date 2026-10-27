@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.nova.simulation
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-class NovaSimulation extends PerformanceTestRunner with IndividualUserSimulation {
+class NovaSimulation extends PerformanceTestRunner with IndividualUserSimulation with VATOrganisationUserSimulation {
 
   runSimulation()
 }
