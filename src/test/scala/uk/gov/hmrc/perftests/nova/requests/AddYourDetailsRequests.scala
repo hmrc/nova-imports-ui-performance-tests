@@ -29,7 +29,7 @@ object AddYourDetailsRequests extends BaseRequest {
   private val addYourEmailAddress            = s"$route/email-address"
   private val checkYourAnswersAddYourDetails = s"$route/check-answers/your-details"
 
-  // Organisation Details - About your details
+  // Organisation - About your details
   val navigateToAboutYourDetails: HttpRequestBuilder =
     http("Navigate to About your details Page")
       .get(s"$baseUrl$aboutYourDetails")
@@ -103,7 +103,7 @@ object AddYourDetailsRequests extends BaseRequest {
       .formParam("value", "#{notifierEmailAddress}")
       .check(status.is(303))
 
-  // Check Answers - Add your details
+  // Check Your Answers - Add your details
   val navigateToCheckYourAnswersAddYourDetails: HttpRequestBuilder =
     http("Navigate to Check your answers - Add your details Page")
       .get(s"$baseUrl$checkYourAnswersAddYourDetails")
